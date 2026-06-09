@@ -1,0 +1,376 @@
+/* ============================================
+   CPD RINK HUD — Full Stylesheet
+   ============================================ */
+
+/* --- Reset --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* --- Variables: Dark Mode (default) --- */
+:root {
+  --bg-primary:     #0a0e1a;
+  --bg-card:        #111827;
+  --bg-card-hover:  #1a2235;
+  --border:         #1e3a5f;
+  --accent-blue:    #1d6fa4;
+  --accent-ice:     #a8d8ea;
+  --text-primary:   #e8f4f8;
+  --text-secondary: #6b8fa8;
+  --text-dim:       #3d5a70;
+
+  --green:   #1a7a4a;
+  --green-t: #22c55e;
+  --red:     #7a1a1a;
+  --red-t:   #ef4444;
+  --yellow:  #7a6a1a;
+  --yellow-t:#eab308;
+  --orange:  #7a3d1a;
+  --orange-t:#f97316;
+  --gray:    #2a3a4a;
+  --gray-t:  #6b8fa8;
+
+  --font-display: 'Oswald', 'Barlow Condensed', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+  --font-body:    'Inter', system-ui, sans-serif;
+}
+
+/* --- Variables: Light Mode --- */
+body.hud-light {
+  --bg-primary:     #f0f4f8;
+  --bg-card:        #ffffff;
+  --bg-card-hover:  #e8f0f7;
+  --border:         #c8daea;
+  --accent-blue:    #1d6fa4;
+  --accent-ice:     #0e4d72;
+  --text-primary:   #0d1f2d;
+  --text-secondary: #3d6480;
+  --text-dim:       #7a9ab5;
+
+  --green:   #dcfce7;
+  --green-t: #15803d;
+  --red:     #fee2e2;
+  --red-t:   #b91c1c;
+  --yellow:  #fef9c3;
+  --yellow-t:#a16207;
+  --orange:  #ffedd5;
+  --orange-t:#c2410c;
+  --gray:    #e2eaf0;
+  --gray-t:  #3d6480;
+}
+
+/* --- Base --- */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* --- Header --- */
+.hud-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hud-header h1 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-ice);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.season-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+}
+
+/* --- Theme Toggle --- */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #fff;
+}
+
+/* --- Filters --- */
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.filters button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filters button:hover,
+.filters button.active {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: #fff;
+}
+
+/* --- Rink Grid --- */
+.rink-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border-top: 1px solid var(--border);
+}
+
+body.hud-light .rink-grid {
+  background: var(--bg-primary);
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+}
+
+/* --- Rink Card --- */
+.rink-card {
+  background: var(--bg-card);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: background 0.15s ease;
+  position: relative;
+}
+
+.rink-card:hover {
+  background: var(--bg-card-hover);
+}
+
+body.hud-light .rink-card {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+body.hud-light .rink-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.rink-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.rink-card .park-name {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.rink-card .neighborhood {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.rink-card .hours {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-ice);
+  margin-top: 0.25rem;
+}
+
+.rink-card a {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--accent-blue);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.rink-card a:hover { color: var(--accent-ice); }
+
+.rink-card[data-type="indoor"]::before,
+.rink-card[data-type="outdoor"]::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+}
+
+.rink-card[data-type="indoor"]::before  { background: var(--accent-blue); }
+.rink-card[data-type="outdoor"]::before { background: var(--accent-ice); }
+
+/* --- Status Badge --- */
+.status-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.status--green  { background: var(--green);  color: var(--green-t); }
+.status--red    { background: var(--red);    color: var(--red-t); }
+.status--yellow { background: var(--yellow); color: var(--yellow-t); }
+.status--orange { background: var(--orange); color: var(--orange-t); }
+.status--gray   { background: var(--gray);   color: var(--gray-t); }
+
+/* --- Program / Amenity Badges --- */
+.program-badge,
+.badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 2px;
+  margin: 0.15rem 0.15rem 0 0;
+}
+
+/* --- No Rinks --- */
+.no-rinks {
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+/* --- Detail Page --- */
+.rink-detail {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.rink-header {
+  margin-bottom: 1.5rem;
+}
+
+.rink-header h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ice);
+  margin: 0.5rem 0 0.25rem;
+}
+
+.rink-header p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.rink-meta {
+  display: flex;
+  gap: 1rem;
+  margin: 1.25rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hours-block,
+.programs,
+.amenities {
+  margin: 1.5rem 0;
+}
+
+.hours-block h3,
+.programs h3,
+.amenities h3 {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+}
+
+.hours-block p {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent-ice);
+  margin-bottom: 0.25rem;
+}
+
+.status-note {
+  background: var(--orange);
+  color: var(--orange-t);
+  font-size: 0.8rem;
+  padding: 0.6rem 1rem;
+  border-radius: 2px;
+  margin: 1rem 0;
+}
+
+.cpd-link,
+.back-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  margin-right: 1rem;
+  font-size: 0.75rem;
+  color: var(--accent-blue);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cpd-link:hover,
+.back-link:hover { color: var(--accent-ice); }
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+  .rink-grid { grid-template-columns: 1fr; }
+  .hud-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+  .filters { flex-wrap: wrap; }
+}
