@@ -1,0 +1,8 @@
+baseUrl: $PRIMARY_SITE_URL
+handle: default
+hasUrls: true
+language: en
+name: 'CPD rink HUD'
+primary: true
+siteGroup: 7b14d274-a54c-4540-bc4f-8b3ebda03671 # CPD rink HUD
+sortOrder: 1

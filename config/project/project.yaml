@@ -1,0 +1,43 @@
+dateModified: 1781043207
+email:
+  fromEmail: krnzdvd@yahoo.com
+  fromName: 'CPD rink HUD'
+  transportType: craft\mail\transportadapters\Sendmail
+meta:
+  __names__:
+    0b9944d2-379a-4fae-8fe9-0ca94c7a0471: Amenities # Amenities
+    0d6b1ed5-741c-4d6a-91ce-984d1e35dc4e: Neighborhood # Neighborhood
+    3e8aaf2b-185d-491c-ac21-4606f8f7b07a: 'Year Round' # Year Round
+    6e48119d-b85a-433f-996b-c1a6c3ce19e0: 'Season Close Date' # Season Close Date
+    7b14d274-a54c-4540-bc4f-8b3ebda03671: 'CPD rink HUD' # CPD rink HUD
+    14f68287-f083-4a5a-858f-38de9cb3e46c: 'Current Status' # Current Status
+    252ad2ff-9d4e-42bb-b021-2038caca3ddc: 'Park Name' # Park Name
+    424bc241-b640-4a42-9e21-618817a69bfa: Address # Address
+    0483c214-3f00-43f6-9de8-e5efaf666efa: 'Hockey Hours Close' # Hockey Hours Close
+    555c3dea-767e-421e-9d0b-4219d7aabac9: 'CPD Detail Page URL' # CPD Detail Page URL
+    4506f4d7-4397-42fd-8c9c-6dffa00d716d: 'Hockey Hours Open' # Hockey Hours Open
+    4822ffcb-b2aa-4324-9961-fc7eb19be80d: 'Ice Rink' # Ice Rink
+    7330b3c9-b411-4449-8564-f494cb7f0264: 'Season Open Date' # Season Open Date
+    7764c9bc-7d00-4497-aeff-4b924b46e613: 'Hockey Days Available' # Hockey Days Available
+    04457354-2069-4186-8150-0989c9e45859: Latitude # Latitude
+    37703412-6f80-49cc-ab31-c4dcbb432524: 'Is Indoor' # Is Indoor
+    a98f2d86-9b4e-4b56-bdd1-64fb8a74c292: 'Public Skate Close' # Public Skate Close
+    c1e99914-7337-4617-b883-c4913f074d9a: 'Public Skate Open' # Public Skate Open
+    c44c418e-2c88-4b43-86f3-965868022b50: 'CPD rink HUD' # CPD rink HUD
+    c126f387-2891-4035-82ba-9e326a09bc60: 'Ice Rinks' # Ice Rinks
+    cc9bce2a-2975-428c-9196-1a5850384518: Longitude # Longitude
+    cd7fcd4b-84d5-4eb3-a977-6a483aacfa73: 'Programs Offered' # Programs Offered
+    f8cb7587-7f49-4914-8404-168df3765dad: 'Status Note' # Status Note
+system:
+  edition: solo
+  live: true
+  name: 'CPD rink HUD'
+  schemaVersion: 5.10.0.0
+  timeZone: America/Los_Angeles
+users:
+  allowPublicRegistration: false
+  defaultGroup: null
+  photoSubpath: null
+  photoVolumeUid: null
+  require2fa: false
+  requireEmailVerification: true

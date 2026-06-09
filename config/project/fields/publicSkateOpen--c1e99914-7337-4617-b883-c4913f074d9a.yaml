@@ -1,0 +1,12 @@
+columnSuffix: null
+handle: publicSkateOpen
+instructions: null
+name: 'Public Skate Open'
+searchable: false
+settings:
+  max: null
+  min: null
+  minuteIncrement: 30
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Time

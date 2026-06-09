@@ -1,0 +1,130 @@
+columnSuffix: null
+handle: programsOffered
+instructions: null
+name: 'Programs Offered'
+searchable: false
+settings:
+  customOptions: false
+  options:
+    -
+      __assoc__:
+        -
+          - label
+          - 'Open Skate'
+        -
+          - value
+          - openSkate
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Stick & Puck'
+        -
+          - value
+          - stickPuck
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Pond Hockey'
+        -
+          - value
+          - pondHockey
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Rat Hockey'
+        -
+          - value
+          - ratHockey
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Learn to Skate'
+        -
+          - value
+          - learnToSkate
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Senior Skate'
+        -
+          - value
+          - seniorSkate
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Youth Hockey Clinics'
+        -
+          - value
+          - youthHockeyClinics
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+translationKeyFormat: null
+translationMethod: none
+type: craft\fields\Checkboxes

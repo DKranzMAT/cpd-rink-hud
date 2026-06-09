@@ -1,0 +1,22 @@
+defaultPlacement: end
+enableVersioning: true
+entryTypes:
+  -
+    uid: 4822ffcb-b2aa-4324-9961-fc7eb19be80d # Ice Rink
+handle: iceRinks
+maxAuthors: 1
+minAuthors: 1
+name: 'Ice Rinks'
+previewTargets:
+  -
+    label: 'Primary entry page'
+    refresh: '1'
+    urlFormat: '{url}'
+propagationMethod: all
+siteSettings:
+  c44c418e-2c88-4b43-86f3-965868022b50: # CPD rink HUD
+    enabledByDefault: true
+    hasUrls: true
+    template: rinks/_entry
+    uriFormat: 'rinks/{slug}'
+type: channel
