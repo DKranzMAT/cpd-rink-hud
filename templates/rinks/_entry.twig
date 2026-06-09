@@ -6,8 +6,8 @@
 <div class="rink-detail">
 
   <div class="rink-header">
-    {% if entry.currentStatus.value %}
-      {% set status = entry.currentStatus.value %}
+    {% if entry.currentStatus %}
+      {% set status = entry.currentStatus %}
       {% set colorMap = {
         'Open': 'green',
         'Closed': 'red',
@@ -19,13 +19,13 @@
     {% endif %}
 
     <h1>{{ entry.title }}</h1>
-    <p>{{ entry.parkName }} · {{ entry.neighborhood.label }}</p>
+    <p>{{ entry.parkName }} · {{ entry.neighborhood }}</p>
     <p>{{ entry.address }}</p>
   </div>
 
   <div class="rink-meta">
-    <span>{{ entry.isIndoor.value ? 'Indoor' : 'Outdoor' }}</span>
-    {% if entry.yearRound.value %}
+    <span>{{ entry.isIndoor ? 'Indoor' : 'Outdoor' }}</span>
+    {% if entry.yearRound %}
       <span>Year-Round</span>
     {% else %}
       {% if entry.seasonOpenDate and entry.seasonCloseDate %}
@@ -44,7 +44,7 @@
     {% endif %}
     {% if entry.hockeyDaysAvailable | length %}
       <p>Hockey Days:
-        {% for day in entry.hockeyDaysAvailable.selectedOptions %}
+        {% for day in entry.hockeyDaysAvailable %}
           <span class="badge">{{ day.label }}</span>
         {% endfor %}
       </p>
@@ -54,7 +54,7 @@
   {% if entry.programsOffered | length %}
   <div class="programs">
     <h3>Programs</h3>
-    {% for program in entry.programsOffered.selectedOptions %}
+    {% for program in entry.programsOffered %}
       <span class="badge">{{ program.label }}</span>
     {% endfor %}
   </div>
@@ -63,7 +63,7 @@
   {% if entry.amenities | length %}
   <div class="amenities">
     <h3>Amenities</h3>
-    {% for amenity in entry.amenities.selectedOptions %}
+    {% for amenity in entry.amenities %}
       <span class="badge">{{ amenity.label }}</span>
     {% endfor %}
   </div>
