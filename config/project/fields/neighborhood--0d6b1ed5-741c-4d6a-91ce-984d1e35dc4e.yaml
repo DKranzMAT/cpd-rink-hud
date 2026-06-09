@@ -10,10 +10,95 @@ settings:
       __assoc__:
         -
           - label
-          - ''
+          - 'West Ridge'
         -
           - value
+          - westRidge
+        -
+          - icon
           - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Hyde Park'
+        -
+          - value
+          - hydePark
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Mount Greenwood'
+        -
+          - value
+          - mountGreenwood
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Garfield Ridge'
+        -
+          - value
+          - garfieldRidge
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Lincoln Park'
+        -
+          - value
+          - lincolnPark
+        -
+          - icon
+          - ''
+        -
+          - color
+          - ''
+        -
+          - default
+          - ''
+    -
+      __assoc__:
+        -
+          - label
+          - 'Grant Park'
+        -
+          - value
+          - grantPark
         -
           - icon
           - ''

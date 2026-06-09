@@ -1,6 +1,5 @@
 {% extends '_layout' %}
 {% block title %}CPD Rink HUD — Chicago Park District Ice Rinks{% endblock %}
-
 {% block content %}
 
 <div class="filters">
@@ -17,10 +16,10 @@
 {% if rinks | length %}
 <div class="rink-grid">
   {% for rink in rinks %}
-  <div class="rink-card" data-type="{{ rink.isIndoor.value ? 'indoor' : 'outdoor' }}">
+  <div class="rink-card" data-type="{{ rink.isIndoor ? 'indoor' : 'outdoor' }}">
 
-    {% if rink.currentStatus.value %}
-      {% set status = rink.currentStatus.value %}
+    {% if rink.currentStatus %}
+      {% set status = rink.currentStatus %}
       {% set colorMap = {
         'Open': 'green',
         'Closed': 'red',
@@ -33,7 +32,7 @@
 
     <h2>{{ rink.title }}</h2>
     <p class="park-name">{{ rink.parkName }}</p>
-    <p class="neighborhood">{{ rink.neighborhood.label }}</p>
+    <p class="neighborhood">{{ rink.neighborhood }}</p>
 
     {% if rink.publicSkateOpen and rink.publicSkateClose %}
     <div class="hours">
@@ -41,7 +40,7 @@
     </div>
     {% endif %}
 
-    {% if rink.isIndoor.value %}
+    {% if rink.isIndoor %}
       <span class="program-badge">🏠 Indoor</span>
     {% endif %}
 
