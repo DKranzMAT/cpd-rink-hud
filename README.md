@@ -85,7 +85,7 @@ web/ — Docroot
 
 ## Status
 
-In development
+Local development
 
 ---
 
