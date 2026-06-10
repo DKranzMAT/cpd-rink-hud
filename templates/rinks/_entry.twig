@@ -9,17 +9,17 @@
     {% if entry.currentStatus %}
       {% set status = entry.currentStatus %}
       {% set colorMap = {
-        'Open': 'green',
-        'Closed': 'red',
-        'Weather Hold': 'yellow',
-        'Maintenance': 'orange',
-        'Seasonal Closure': 'gray'
-      } %}
-      <span class="status-badge status--{{ colorMap[status] ?? 'gray' }}">{{ status }}</span>
+  'open': 'green',
+  'closed': 'red',
+  'weather hold': 'yellow',
+  'maintenance': 'orange',
+  'seasonal closure': 'gray'
+} %}
+      <span class="status-badge status--{{ colorMap[status|lower] ?? 'gray' }}">{{ status|capitalize }}</span>
     {% endif %}
 
     <h1>{{ entry.title }}</h1>
-    <p>{{ entry.parkName }} · {{ entry.neighborhood }}</p>
+    <p>{{ entry.parkName }} · {{ rink.neighborhood.label }}</p>
     <p>{{ entry.address }}</p>
   </div>
 

@@ -21,18 +21,18 @@
     {% if rink.currentStatus %}
       {% set status = rink.currentStatus %}
       {% set colorMap = {
-        'Open': 'green',
-        'Closed': 'red',
-        'Weather Hold': 'yellow',
-        'Maintenance': 'orange',
-        'Seasonal Closure': 'gray'
-      } %}
+  'open': 'green',
+  'closed': 'red',
+  'weather hold': 'yellow',
+  'maintenance': 'orange',
+  'seasonal closure': 'gray'
+} %}
       <span class="status-badge status--{{ colorMap[status] ?? 'gray' }}">{{ status }}</span>
     {% endif %}
 
     <h2>{{ rink.title }}</h2>
     <p class="park-name">{{ rink.parkName }}</p>
-    <p class="neighborhood">{{ rink.neighborhood }}</p>
+    <p class="neighborhood">{{ rink.neighborhood.label }}</p>
 
     {% if rink.publicSkateOpen and rink.publicSkateClose %}
     <div class="hours">

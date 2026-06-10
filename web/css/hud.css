@@ -249,8 +249,8 @@ body.hud-light .rink-card:hover {
   font-weight: 600;
 }
 
-.status--green  { background: var(--green);  color: var(--green-t); }
-.status--red    { background: var(--red);    color: var(--red-t); }
+.status--green  { background: var(--green);  color: var(--green-t); border: 1px solid var(--green-t); }
+.status--red    { background: var(--red);    color: var(--red-t); border: 1px solid var(--red-t); }
 .status--yellow { background: var(--yellow); color: var(--yellow-t); }
 .status--orange { background: var(--orange); color: var(--orange-t); }
 .status--gray   { background: var(--gray);   color: var(--gray-t); }
