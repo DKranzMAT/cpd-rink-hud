@@ -10,6 +10,8 @@ Live reference for all CPD ice rinks across Chicago neighborhoods.
 
 Hours, programs, amenities, and seasonal status — all in one place.
 
+![CPD Rink HUD Map View](docs/cpd-rink-hud_screen.png)
+
 ---
 
 ## Features
@@ -19,7 +21,17 @@ Hours, programs, amenities, and seasonal status — all in one place.
 - Hours and program details per rink (Rat Hockey, Stick & Puck, Open Skate, etc.)
 - Indoor vs. outdoor indicator
 - Neighborhood browsing
+- Interactive map with click-to-fly and hover info
 - Dark / light mode HUD aesthetic
+
+---
+
+## Interactive Map
+
+- Built with Leaflet.js
+- Click any rink card to fly the map to its location
+- Hover map pins for quick info (status, hours, neighborhood)
+- Map tiles switch between dark/light to match the HUD theme
 
 ---
 
@@ -31,6 +43,7 @@ Hours, programs, amenities, and seasonal status — all in one place.
 - Database: MySQL 8
 - Local Dev: MAMP
 - Frontend: Vanilla CSS
+- Mapping: Leaflet.js + CartoDB/OpenStreetMap tiles
 
 ---
 

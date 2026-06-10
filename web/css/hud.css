@@ -374,3 +374,79 @@ body.hud-light .rink-card:hover {
   .hud-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
   .filters { flex-wrap: wrap; }
 }
+
+/* ============================================
+   MAP LAYOUT
+   ============================================ */
+
+.hud-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) 1fr;
+  height: calc(100vh - 130px);
+}
+
+.rink-list {
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  background: var(--bg-primary);
+}
+
+.rink-list .rink-card {
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.rink-list .rink-card.active-card {
+  background: var(--bg-card-hover);
+}
+
+.rink-list .rink-card.active-card::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent-ice);
+}
+
+.map-panel {
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 130px);
+}
+
+#rink-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Leaflet popup theming */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* --- Responsive: stack on mobile --- */
+@media (max-width: 900px) {
+  .hud-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .rink-list {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 50vh;
+  }
+
+  .map-panel,
+  #rink-map {
+    height: 50vh;
+    position: relative;
+  }
+}

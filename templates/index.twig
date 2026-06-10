@@ -1,5 +1,6 @@
 {% extends '_layout' %}
 {% block title %}CPD Rink HUD — Chicago Park District Ice Rinks{% endblock %}
+
 {% block content %}
 
 <div class="filters">
@@ -14,40 +15,52 @@
   .all() %}
 
 {% if rinks | length %}
-<div class="rink-grid">
-  {% for rink in rinks %}
-  <div class="rink-card" data-type="{{ rink.isIndoor ? 'indoor' : 'outdoor' }}">
+<div class="hud-layout">
 
-    {% if rink.currentStatus %}
-      {% set status = rink.currentStatus %}
-      {% set colorMap = {
-  'open': 'green',
-  'closed': 'red',
-  'weather hold': 'yellow',
-  'maintenance': 'orange',
-  'seasonal closure': 'gray'
-} %}
-      <span class="status-badge status--{{ colorMap[status] ?? 'gray' }}">{{ status }}</span>
-    {% endif %}
+  <div class="rink-list">
+    {% for rink in rinks %}
+    <div class="rink-card"
+         data-type="{{ rink.isIndoor ? 'indoor' : 'outdoor' }}"
+         data-lat="{{ rink.latitude }}"
+         data-lng="{{ rink.longitude }}"
+         data-id="rink-{{ rink.id }}">
 
-    <h2>{{ rink.title }}</h2>
-    <p class="park-name">{{ rink.parkName }}</p>
-    <p class="neighborhood">{{ rink.neighborhood.label }}</p>
+      {% if rink.currentStatus %}
+        {% set status = rink.currentStatus %}
+        {% set colorMap = {
+          'open': 'green',
+          'closed': 'red',
+          'weather hold': 'yellow',
+          'maintenance': 'orange',
+          'seasonal closure': 'gray'
+        } %}
+        <span class="status-badge status--{{ colorMap[status|lower] ?? 'gray' }}">{{ status|capitalize }}</span>
+      {% endif %}
 
-    {% if rink.publicSkateOpen and rink.publicSkateClose %}
-    <div class="hours">
-      ⏱ {{ rink.publicSkateOpen|date('g:i A') }} – {{ rink.publicSkateClose|date('g:i A') }}
+      <h2>{{ rink.title }}</h2>
+      <p class="park-name">{{ rink.parkName }}</p>
+      <p class="neighborhood">{{ rink.neighborhood.label }}</p>
+
+      {% if rink.publicSkateOpen and rink.publicSkateClose %}
+      <div class="hours">
+        ⏱ {{ rink.publicSkateOpen|date('g:i A') }} – {{ rink.publicSkateClose|date('g:i A') }}
+      </div>
+      {% endif %}
+
+      {% if rink.isIndoor %}
+        <span class="program-badge">🏠 Indoor</span>
+      {% endif %}
+
+      <a href="{{ rink.url }}">Details →</a>
+
     </div>
-    {% endif %}
-
-    {% if rink.isIndoor %}
-      <span class="program-badge">🏠 Indoor</span>
-    {% endif %}
-
-    <a href="{{ rink.url }}">Details →</a>
-
+    {% endfor %}
   </div>
-  {% endfor %}
+
+  <div class="map-panel">
+    <div id="rink-map"></div>
+  </div>
+
 </div>
 
 {% else %}
@@ -55,6 +68,9 @@
   <p>No rinks found. Add entries in the control panel.</p>
 </div>
 {% endif %}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
   document.querySelectorAll('.filters button').forEach(btn => {
@@ -65,6 +81,79 @@
       document.querySelectorAll('.rink-card').forEach(card => {
         card.style.display = (filter === 'all' || card.dataset.type === filter) ? '' : 'none';
       });
+    });
+  });
+
+  // --- Map setup ---
+  const map = L.map('rink-map').setView([41.85, -87.65], 10);
+
+  const darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
+    subdomains: 'abcd',
+    maxZoom: 19
+  });
+
+  const lightTiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 19
+  });
+
+  function applyMapTheme() {
+    const isLight = document.body.classList.contains('hud-light');
+    if (isLight) {
+      if (map.hasLayer(darkTiles)) map.removeLayer(darkTiles);
+      if (!map.hasLayer(lightTiles)) lightTiles.addTo(map);
+    } else {
+      if (map.hasLayer(lightTiles)) map.removeLayer(lightTiles);
+      if (!map.hasLayer(darkTiles)) darkTiles.addTo(map);
+    }
+  }
+  applyMapTheme();
+
+  // Hook into existing theme toggle
+  const originalToggle = window.toggleTheme;
+  window.toggleTheme = function() {
+    originalToggle();
+    setTimeout(applyMapTheme, 50);
+  };
+
+  // --- Markers ---
+  const markers = {};
+  document.querySelectorAll('.rink-card').forEach(card => {
+    const lat = parseFloat(card.dataset.lat);
+    const lng = parseFloat(card.dataset.lng);
+    if (isNaN(lat) || isNaN(lng)) return;
+
+    const title = card.querySelector('h2').textContent;
+    const status = card.querySelector('.status-badge')?.textContent || '';
+    const hours = card.querySelector('.hours')?.textContent.trim() || '';
+    const neighborhood = card.querySelector('.neighborhood')?.textContent || '';
+
+    const popupContent = `
+      <strong>${title}</strong><br>
+      <span style="opacity:0.7">${neighborhood}</span><br>
+      ${status ? `<span>${status}</span><br>` : ''}
+      ${hours ? `<span>${hours}</span>` : ''}
+    `;
+
+    const marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent);
+    markers[card.dataset.id] = marker;
+
+    marker.on('mouseover', () => marker.openPopup());
+    marker.on('mouseout', () => marker.closePopup());
+
+    marker.on('click', () => {
+      document.querySelectorAll('.rink-card').forEach(c => c.classList.remove('active-card'));
+      card.classList.add('active-card');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    card.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') return;
+      document.querySelectorAll('.rink-card').forEach(c => c.classList.remove('active-card'));
+      card.classList.add('active-card');
+      map.flyTo([lat, lng], 14, { duration: 1 });
+      marker.openPopup();
     });
   });
 </script>
