@@ -128,19 +128,43 @@
     const status = card.querySelector('.status-badge')?.textContent || '';
     const hours = card.querySelector('.hours')?.textContent.trim() || '';
     const neighborhood = card.querySelector('.neighborhood')?.textContent || '';
+    const detailsUrl = card.querySelector('a').getAttribute('href');
+
+    const slug = card.querySelector('a').getAttribute('href').split('/').filter(Boolean).pop();
+    const imgSrc = `/img/rinks/${slug}-icon.png`;
 
     const popupContent = `
+      <img src="${imgSrc}" alt="${title}" style="width:100%; max-width:200px; border-radius:2px; margin-bottom:0.5rem;" onerror="this.style.display='none'"><br>
       <strong>${title}</strong><br>
       <span style="opacity:0.7">${neighborhood}</span><br>
       ${status ? `<span>${status}</span><br>` : ''}
-      ${hours ? `<span>${hours}</span>` : ''}
+      ${hours ? `<span>${hours}</span><br>` : ''}
+      <a href="${detailsUrl}" style="display:inline-block; margin-top:0.4rem; color:var(--accent-blue);">View Details →</a>
     `;
 
-    const marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent);
+    const marker = L.marker([lat, lng]).addTo(map).bindPopup(popupContent, { autoClose: false, closeOnClick: false });
     markers[card.dataset.id] = marker;
 
-    marker.on('mouseover', () => marker.openPopup());
-    marker.on('mouseout', () => marker.closePopup());
+    let popupTimeout;
+
+    marker.on('mouseover', () => {
+      clearTimeout(popupTimeout);
+      marker.openPopup();
+    });
+
+    marker.on('mouseout', () => {
+      popupTimeout = setTimeout(() => marker.closePopup(), 200);
+    });
+
+    marker.on('popupopen', () => {
+      const popupEl = marker.getPopup().getElement();
+      if (popupEl) {
+        popupEl.addEventListener('mouseenter', () => clearTimeout(popupTimeout));
+        popupEl.addEventListener('mouseleave', () => {
+          popupTimeout = setTimeout(() => marker.closePopup(), 200);
+        });
+      }
+    });
 
     marker.on('click', () => {
       document.querySelectorAll('.rink-card').forEach(c => c.classList.remove('active-card'));

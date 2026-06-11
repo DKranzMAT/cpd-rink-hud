@@ -16,12 +16,13 @@ Hours, programs, amenities, and seasonal status — all in one place.
 
 ## Features
 
-- All Chicago Park District ice rinks in one place
+- 8 Chicago Park District ice rinks across the city
 - Open / Closed / Weather Hold / Maintenance status board
 - Hours and program details per rink (Rat Hockey, Stick & Puck, Open Skate, etc.)
 - Indoor vs. outdoor indicator
 - Neighborhood browsing
 - Interactive map with click-to-fly and hover info
+- Rink photos on detail pages and map popups
 - Dark / light mode HUD aesthetic
 
 ---
@@ -30,8 +31,17 @@ Hours, programs, amenities, and seasonal status — all in one place.
 
 - Built with Leaflet.js
 - Click any rink card to fly the map to its location
-- Hover map pins for quick info (status, hours, neighborhood)
+- Hover map pins for quick info (photo, status, hours, neighborhood)
+- "View Details →" link directly from map popups
 - Map tiles switch between dark/light to match the HUD theme
+
+---
+
+## Detail Pages
+
+- Two-column layout with rink photo and full info
+- Hours, programs, amenities, and status notes
+- Direct link to the official CPD facility page
 
 ---
 
@@ -51,7 +61,7 @@ Hours, programs, amenities, and seasonal status — all in one place.
 
 Rink locations sourced from the City of Chicago Open Data Portal.
 
-Hours and program details manually curated from chicagoparkdistrict.com.
+Hours, programs, and amenity details manually curated from chicagoparkdistrict.com.
 
 ---
 
@@ -79,7 +89,7 @@ config/ — Craft config and Project Config YAML
 
 templates/ — Twig templates
 
-web/ — Docroot
+web/ — Docroot, including rink images at web/img/rinks/
 
 ---
 
